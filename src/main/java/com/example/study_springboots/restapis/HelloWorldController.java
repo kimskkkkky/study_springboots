@@ -74,4 +74,13 @@ public class HelloWorldController {
 
         return ResponseEntity.ok().body(arrayList);
     }
+
+    @GetMapping("/helloWorldResponseFake/{companyId}")  //메쏘드 이름, url만 다르게 하면 여러개 넣을 수 있음.
+    public ResponseEntity<Object> helloWorldResponseFake(@PathVariable String companyId){
+            
+        ArrayList arrayList = new ArrayList<>();
+        helloWorldService.fakeSelect(companyId);
+
+        return ResponseEntity.ok().body(arrayList);
+    }
 }
