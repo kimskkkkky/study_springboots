@@ -20,8 +20,21 @@
                 ;
 	</select>
 
-         <!-- 전체 -->
+         <!-- mybatis foreach Map.put("CAR_INFOR_ID_LIST", CAR_INFOR_ID_LIST)-->
+	<select id="selectInUID" parameterType="Map" resultType="Map">
+                select *
+                from db_cars.car_infors
+                where 1 = 1
+                and CAR_INFOR_ID in
 
+                <foreach item="CAR_INFOR_ID" index="index" collection="CAR_INFOR_ID_LIST"
+                        open="(" separator="," close=")" nullable="true">
+                        <!-- for문 시작할때 open="("  (를 열어주고, separator="," 중간에 ,를 넣고 close=")" 끝날때 )를 닫아준다  -->
+                        #{CAR_INFOR_ID}
+                </foreach>
+        </select>
+        
+        <!-- 전체 -->
 	<select id="selectAll" parameterType="Map" resultType="Map">
                 select *
                 from db_cars.car_infors

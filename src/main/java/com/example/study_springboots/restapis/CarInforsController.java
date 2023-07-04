@@ -19,6 +19,17 @@ public class CarInforsController {
     @Autowired
     CarInforsService carInforsService;
 
+    @GetMapping("/selectInUID")
+    public ResponseEntity selectInUID(@RequestBody Map paramMap){
+         Object result = null;
+        try {
+           result = carInforsService.selectInUID(paramMap);
+        } catch (Exception e) {
+            return ResponseEntity.ok().body(result);
+        }
+        return ResponseEntity.ok().body(result);
+    }
+
     // /selectSearch/YEAR/2020
     @GetMapping("/selectSearch/{search}/{words}")
     public ResponseEntity selectSearch(@PathVariable String search, @PathVariable String words){
