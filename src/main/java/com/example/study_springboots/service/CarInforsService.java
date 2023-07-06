@@ -24,6 +24,14 @@ public class CarInforsService {
         return result;
     }
 
+    //검색
+        public Object selectSearch(Map dataMap) {
+        // Object getOne(String sqlMapId, Object dataMap)
+        String sqlMapId = "CarInfors.selectSearch";
+        Object result = sharedDao.getList(sqlMapId, dataMap);
+        return result;
+    }
+
         //검색
         public Object selectSearch(String search, String words) {
         // Object getOne(String sqlMapId, Object dataMap)
