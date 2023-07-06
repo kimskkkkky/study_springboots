@@ -36,7 +36,8 @@
     </nav>
 
     <%
-        HashMap params = (HashMap)request.getAttribute("params")
+        HashMap params = (HashMap)request.getAttribute("params");
+        String searchStr = (String) params.getOrDefault("search", "");
     %>
     <!-- Main Content -->
     <div class="container mt-4">
@@ -44,8 +45,15 @@
             <div class="col-md-8">
                 <h2>Search</h2>
                 <div class="input-group mb-3">
-                    <input type="text" value ='<%= (String)params.get("words")%>' class="form-control" placeholder="Search..." id="keydownEnter">
-                    <button class="btn btn-primary" type="button" onclick="carTableBody()">Go</button>
+                    <form action="/carInfor/selectSearch" method="get">
+                    <select class="form-select" name = "search">
+                        <option >Select an option...</option>
+                        <option value="YEAR" <%= (searchStr.equals("YEAR")) ? "selected" : "" %>>YEAR</option>
+                        <option value="CAR_NAME" <%= (searchStr.equals("CAR_NAME")) ? "selected" : "" %>>CAR_NAME</option>
+                      </select>
+                    <input type="text" name = "words" value ='<%= params.getOrDefault("words", "")%>' class="form-control" placeholder="Search..." id="keydownEnter">
+                    <button class="btn btn-primary" type="submit">Go</button>
+                </form>
                 </div>
                 <h2>Table</h2>
                 <table class="table">
@@ -58,6 +66,20 @@
                         </tr>
                     </thead>
                     <tbody id="carTableBody">
+                        <% 
+                            ArrayList resultList = (ArrayList)request.getAttribute("result");
+                            for(int i =0; i < resultList.size(); i= i+1){
+                                HashMap record = (HashMap) resultList.get(i);
+                        %>
+                        <tr>
+                                <td><%= record.get("YEAR")%></td>
+                                <td><%= record.get("CAR_NAME")%></td>
+                                <td><%= record.get("CAR_INFOR_ID")%></td>
+                                <td><%= record.get("COMPANY_ID")%></td>
+                        </tr>
+                        <%
+                            }
+                        %>
                         <!-- Empty -->
                     </tbody>
                 </table>
