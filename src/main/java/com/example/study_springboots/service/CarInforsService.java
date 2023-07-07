@@ -76,7 +76,28 @@ public class CarInforsService {
         Object result = sharedDao.update(sqlMapId,dataMap);
         return null;
     }
+     //MVC view에 사용
+    public Object delete(Map dataMap){
+        String sqlMapId = "CarInfors.delete";
+        
+        Object result = sharedDao.delete(sqlMapId,dataMap);
+        return result;
+    }
 
+        //MVC view에 사용
+    public Object deleteAndSelectSearch(Map dataMap){
+         HashMap result = new HashMap<>();
+        //  String sqlMapId = "CarInfors.delete";
+        //  result.put ("deletCount", sharedDao.delete(sqlMapId,dataMap));
+        result.put ("deletCount", this.delete(dataMap));
+
+        // sqlMapId = "CarInfors.selectSearch";
+        //  result.put ("resultList", sharedDao.getOne(sqlMapId,dataMap));
+        result.put ("resultList", this.selectSearch(dataMap));
+        return result;
+    }
+
+    //rest api에 사용
      public Object delete(String CAR_INFOR_ID){
         String sqlMapId = "CarInfors.delete";
         HashMap dataMap = new HashMap<>();

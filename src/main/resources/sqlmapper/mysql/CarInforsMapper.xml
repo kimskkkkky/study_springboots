@@ -13,9 +13,9 @@
                         AND YEAR > #{words}    
                         ]]>
                          </when>
-                        <otherwise>
+                         <when test="search == 'CAR_NAME'">
                         AND CAR_NAME like CONCAT(#{words}, '%')
-                        </otherwise>
+                        </when>
                 </choose>
                 ;
 	</select>
