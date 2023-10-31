@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MainSpl">
+         <!-- 검색 -->
+
+	<select id="selectSearch" parameterType="Map" resultType="Map">
+                select *
+                from project_nutrients.commons_code
+                <choose>
+                        <when test="search == 'NAME'">
+                         </when>
+                         <when test="search == 'use_yn'">
+                        </when>
+                </choose>
+                ;
+	</select>
+
+</mapper>
